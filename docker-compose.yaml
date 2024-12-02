@@ -2,7 +2,9 @@ services:
   spark-iceberg:
     image: tabulario/spark-iceberg
     container_name: spark-iceberg
-    build: spark/
+    build:
+      context: ./spark
+      dockerfile: Dockerfile
     networks:
       iceberg_net:
     depends_on:
@@ -15,7 +17,7 @@ services:
     environment:
       - AWS_ACCESS_KEY_ID=admin
       - AWS_SECRET_ACCESS_KEY=password
-      - AWS_REGION=us-east-1
+      - RAWG_API_KEY=${RAWG_API_KEY}
     ports:
       - 8888:8888
       - 8080:8080
@@ -31,7 +33,6 @@ services:
     environment:
       - AWS_ACCESS_KEY_ID=admin
       - AWS_SECRET_ACCESS_KEY=password
-      - AWS_REGION=us-east-1
       - CATALOG_WAREHOUSE=s3://rawg-video-game-sales/
       - CATALOG_IO__IMPL=org.apache.iceberg.aws.s3.S3FileIO
       - CATALOG_S3_ENDPOINT=http://minio:9000
@@ -60,7 +61,6 @@ services:
     environment:
       - AWS_ACCESS_KEY_ID=admin
       - AWS_SECRET_ACCESS_KEY=password
-      - AWS_REGION=us-east-1
     entrypoint: >
       /bin/sh -c "
       mc alias set myminio http://minio:9000 admin password;
