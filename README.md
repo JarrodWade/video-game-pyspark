@@ -10,6 +10,7 @@ This project extracts and analyzes video game sales data from the RAWG API using
 
 ## Project Structure
 
+```
 project_root/
 ├── docker-compose.yaml # Container orchestration
 ├── notebooks/ # Jupyter notebooks for analysis
@@ -18,7 +19,7 @@ project_root/
 │ └── 03_analyze_sales.ipynb
 ├── data/ # Raw data storage
 └── .env.example # Template for environment variables
-)
+```
 
 ## Prerequisites
 - Docker and Docker Compose
