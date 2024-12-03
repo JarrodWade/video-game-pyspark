@@ -1,4 +1,0 @@
-rawg-api-wrapper
-pandas
-requests
-python-dotenv
