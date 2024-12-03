@@ -1,11 +1,11 @@
 # RAWG Video Game Sales Analysis
 
-This project extracts and analyzes video game sales data from the RAWG API using PySpark and Apache Iceberg. The data is stored in MinIO (S3-compatible storage) using the Apache Iceberg table format for efficient querying and analysis.
+This project extracts and analyzes video game sales data from the RAWG API using PySpark and AWS S3. The data is stored in AWS S3 using the parquet file format for efficiency. 
 
 ## Architecture
 - **Data Source**: RAWG Video Games Database API
 - **Processing**: Apache Spark (PySpark)
-- **Storage**: MinIO (S3-compatible) with Apache Iceberg
+- **Storage**: S3
 - **Development**: Jupyter Notebooks
 
 ## Project Structure
@@ -17,13 +17,13 @@ project_root/
 │ ├── 01_extract_rawg_data.ipynb
 │ ├── 02_transform_games_data.ipynb
 │ └── 03_analyze_sales.ipynb
-├── data/ # Raw data storage
 └── .env.example # Template for environment variables
 ```
 
 ## Prerequisites
 - Docker and Docker Compose
 - RAWG API Key (get it from [RAWG](https://rawg.io/apidocs))
+- AWS Credentials
 
 ## Setup
 1. Clone the repository:
@@ -40,24 +40,22 @@ project_root/
      AWS_SECRET_ACCESS_KEY=your_secret_key
      AWS_REGION=your_region
      RAWG_API_KEY=your_rawg_api_key
-     MINIO_ROOT_USER=your_minio_user
-     MINIO_ROOT_PASSWORD=your_minio_password
      ```
 
 3. Start the containers:
    ```bash
    docker-compose up -d
+   OR
+   Make up
    ```
 
 ## Services
 - **Jupyter Lab**: http://localhost:8888
-- **MinIO Console**: http://localhost:9001
-  - Login with credentials from .env file
 - **Spark UI**: http://localhost:4040 (when Spark is running)
 
 ## Data Storage
-- Raw data and Iceberg tables are stored in the `rawg-video-game-sales` S3 bucket
-- Data is organized using Apache Iceberg table format for efficient querying and time travel capabilities
+- Raw data and processed data are stored in the `rawg-pyspark` S3 bucket
+- Data is eventually stored in parquet file format for efficiency. 
 
 ## Usage
 1. Access Jupyter Lab at http://localhost:8888
